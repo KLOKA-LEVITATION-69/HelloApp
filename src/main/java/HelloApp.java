@@ -1,28 +1,49 @@
-public class HelloApp {
+import java.util.Scanner;
+
+public class DigitFrequency {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-        String name;
 
-     
-        if (args.length > 0) {
+        System.out.print("Enter a number: ");
+        int number = sc.nextInt();
 
-   
-            StringBuilder nameBuilder = new StringBuilder();
+        int temp = number;
+        int count = 0;
 
-            for (int i = 0; i < args.length; i++) {
-                nameBuilder.append(args[i]);
 
-                if (i < args.length - 1) {
-                    nameBuilder.append(", ");
-                }
-            }
-
-            name = nameBuilder.toString();
-
-        } else {
-            name = "World";
+        while (temp != 0) {
+            count++;
+            temp = temp / 10;
         }
 
-        System.out.println("Hello, " + name + "!");
+
+        int[] digits = new int[count];
+        temp = number;
+        int index = 0;
+
+        while (temp != 0) {
+            digits[index] = temp % 10;
+            temp = temp / 10;
+            index++;
+        }
+
+
+        int[] frequency = new int[10];
+
+
+        for (int i = 0; i < digits.length; i++) {
+            frequency[digits[i]]++;
+        }
+
+
+        System.out.println("\nDigit Frequencies:");
+        for (int i = 0; i < 10; i++) {
+            if (frequency[i] > 0) {
+                System.out.println("Digit " + i + " occurs " + frequency[i] + " times");
+            }
+        }
+
+        sc.close();
     }
 }
